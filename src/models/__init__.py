@@ -1,9 +1,9 @@
 """Models of entities."""
 
-# from .driver import Driver, DriverStats
 from .car import Car
+from .driver import Driver, DriverStats
 
 # from .team import Team
 from .track import Track, TrackType
 
-__all__ = ["Track", "TrackType", "Car"]
+__all__ = ["Driver", "DriverStats", "Track", "TrackType", "Car"]

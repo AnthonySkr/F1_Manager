@@ -1,3 +1,4 @@
+README.md
 pyproject.toml
 F1_manager.egg-info/PKG-INFO
 F1_manager.egg-info/SOURCES.txt

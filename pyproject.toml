@@ -1,0 +1,95 @@
+# Tests
+[tool.pytest.ini_options]
+minversion = "9.0"
+addopts = "--strict-markers --cov=. --cov-report=term-missing"
+testpaths = ["tests"]
+
+# Lint / Format
+[tool.black]
+line-length = 88
+target-version = ['py313']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+known_first_party = ["F1_manager"]
+skip_glob = ["venv/*"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py313"
+lint.select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "C",   # McCabe complexity
+    "I",   # isort (peut gérer le tri des imports)
+    "N",   # Naming conventions
+    "D",   # pydocstyle (docstrings) - attention, cela peut être verbeux au début
+    "UP",  # pyupgrade
+    "TID", # flake8-tidy-imports
+    "B",   # flake8-bugbear
+    "A",   # flake8-builtins
+    "COM", # flake8-commas
+    "Q",   # flake8-quotes
+]
+lint.ignore = [
+    "E501",  # Line too long (handled by Black)
+    "D100",  # Missing docstring in public module (si vous ne voulez pas de docstrings partout)
+]
+lint.unfixable = [
+    "ERA001", # Dead code
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"] # Ignorer les imports inutilisés dans les __init__.py par exemple
+
+[tool.ruff.lint.isort]
+known-first-party = ["F1_manager"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+# Git
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "$version"
+version_scheme = "semver"
+version_provider = "pep621"
+major_version_zero = true
+update_changelog_on_release = true
+
+# Tasks
+[tool.taskipy.tasks]
+# Formatage
+format = "black src tests && isort src tests"
+
+# Linting
+lint = "ruff check src tests"
+lint-fix = "ruff check src tests --fix"
+
+# Tests
+test = "pytest"
+test-v = "pytest -v"
+test-cov = "pytest --cov=src --cov-report=term-missing --cov-report=html"
+
+# Nettoyage
+clean = "python -c \"import shutil; from pathlib import Path; [shutil.rmtree(p, ignore_errors=True) for p in Path('.').rglob('__pycache__')]; [p.unlink(missing_ok=True) for p in Path('.').rglob('*.pyc')]; [shutil.rmtree(d, ignore_errors=True) for d in ['.pytest_cache', 'htmlcov', '.ruff_cache', '.mypy_cache', '.coverage']]; print('✅ Nettoyage terminé')\""
+
+# Pipeline complète
+all = "task format && task lint && task test-cov"
+check = "task lint && task test"
+ci = "task format && task lint && task test-cov"
+
+# Exécution
+run = "python src/main.py"
+
+# Pre-commit
+pre-commit-all = "pre-commit run --all-files"
+pre-commit-install = "pre-commit install"
+
+# Installation
+install = "pip install -e . && pip install -r requirements.txt && pre-commit install"
+
+# Aide personnalisée
+help = "task --list"

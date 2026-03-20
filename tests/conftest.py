@@ -2,7 +2,7 @@
 
 import pytest
 
-from src.models import Car, Track, TrackType
+from src.models import Car, Driver, DriverStats, Track, TrackType
 
 # --- Fixtures pour créer des objets Track pour les tests ---
 
@@ -114,4 +114,88 @@ def high_end_car():
         power_unit=92,
         reliability=85,
         tire_cooling=95,
+    )
+
+
+# --- Fixtures pour créer des objets DriverStats pour les tests ---
+
+
+@pytest.fixture
+def base_driver_stats():
+    """Returns a base DriverStats instance with all stats at 50."""
+    return DriverStats(
+        pace=50,
+        overtaking=50,
+        defending=50,
+        consistency=50,
+        tire_management=50,
+        wet_skill=50,
+    )
+
+
+@pytest.fixture
+def high_rated_driver_stats():
+    """Returns a high-rated DriverStats instance with balanced high stats."""
+    return DriverStats(
+        pace=80,
+        overtaking=75,
+        defending=85,
+        consistency=78,
+        tire_management=80,
+        wet_skill=72,
+    )
+
+
+@pytest.fixture
+def specialist_driver_stats():
+    """Returns a specialist DriverStats with one strong stat and others lower."""
+    return DriverStats(
+        pace=95,  # Specialist in pace
+        overtaking=60,
+        defending=55,
+        consistency=58,
+        tire_management=52,
+        wet_skill=50,
+    )
+
+
+# --- Fixtures pour créer des objets Driver pour les tests ---
+
+
+@pytest.fixture
+def young_driver(base_driver_stats):
+    """Returns a young driver (age 21) with base stats."""
+    return Driver(
+        name="Marcus Rivera",
+        age=21,
+        nationality="Spain",
+        stats=base_driver_stats,
+        salary=2,
+        market_value=5,
+    )
+
+
+@pytest.fixture
+def prime_driver(high_rated_driver_stats):
+    """Returns a prime driver (age 25) with high stats."""
+    return Driver(
+        name="Carlos Sainz",
+        age=25,
+        nationality="Spain",
+        stats=high_rated_driver_stats,
+        salary=15,
+        market_value=45,
+    )
+
+
+@pytest.fixture
+def veteran_driver(specialist_driver_stats):
+    """Returns a veteran driver (age 34) with high pace rating."""
+    return Driver(
+        name="Fernando Alonso",
+        age=34,
+        nationality="Spain",
+        stats=specialist_driver_stats,
+        salary=10,
+        market_value=8,
     )

@@ -2,7 +2,9 @@
 
 import pytest
 
-from src.models import Track, TrackType
+from src.models import Car, Track, TrackType
+
+# --- Fixtures pour créer des objets Track pour les tests ---
 
 
 @pytest.fixture
@@ -70,4 +72,46 @@ def balanced_track():
         overtaking_difficulty=5,  # Medium
         tire_degradation=1.1,  # Medium
         drs_zones=2,
+    )
+
+
+# --- Fixtures pour créer des objets Car pour les tests ---
+
+
+@pytest.fixture
+def base_car():
+    """Returns a base Car instance for testing."""
+    return Car(
+        downforce=50,
+        aero_efficiency=50,
+        chassis=50,
+        power_unit=50,
+        reliability=50,
+        tire_cooling=65,
+    )
+
+
+@pytest.fixture
+def average_car():
+    """Returns an average Car instance for testing."""
+    return Car(
+        downforce=70,
+        aero_efficiency=75,
+        chassis=80,
+        power_unit=70,
+        reliability=60,
+        tire_cooling=70,
+    )
+
+
+@pytest.fixture
+def high_end_car():
+    """Returns a high-end Car instance for testing."""
+    return Car(
+        downforce=95,
+        aero_efficiency=90,
+        chassis=98,
+        power_unit=92,
+        reliability=85,
+        tire_cooling=95,
     )

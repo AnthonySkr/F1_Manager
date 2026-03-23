@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+F1_manager.egg-info/PKG-INFO
+F1_manager.egg-info/SOURCES.txt
+F1_manager.egg-info/dependency_links.txt
+F1_manager.egg-info/requires.txt
+F1_manager.egg-info/top_level.txt
+src/__init__.py
+src/main.py
+src/models/__init__.py
+src/models/car.py
+src/models/driver.py
+src/models/team.py
+src/models/track.py

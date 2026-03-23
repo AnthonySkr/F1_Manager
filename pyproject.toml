@@ -1,3 +1,27 @@
+[project]
+name = "F1_manager"
+version = "0.1.0"
+description = "F1 manager game"
+requires-python = ">=3.13"
+dependencies = [
+    # Tests
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    # Lint/format
+    "black>=26.3.1",
+    "ruff>=0.15.7",
+    "isort>=8.0.1",
+    # Git
+    "pre-commit>=4.5.1",
+    "commitizen>=4.13.9",
+    # Tâches
+    "taskipy>=1.14.1",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
 # Tests
 [tool.pytest.ini_options]
 minversion = "9.0"
@@ -78,7 +102,7 @@ clean = "python -c \"import shutil; from pathlib import Path; [shutil.rmtree(p, 
 
 # Pipeline complète
 all = "task format && task lint && task test-cov"
-check = "task lint && task test"
+check = "task lint && task format"
 ci = "task format && task lint && task test-cov"
 
 # Exécution
@@ -89,7 +113,7 @@ pre-commit-all = "pre-commit run --all-files"
 pre-commit-install = "pre-commit install"
 
 # Installation
-install = "pip install -e . && pip install -r requirements.txt && pre-commit install"
+install = "pip install -e . && pre-commit install"
 
 # Aide personnalisée
 help = "task --list"

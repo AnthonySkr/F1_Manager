@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: F1_manager
+Version: 0.1.0
+Summary: F1 manager game
+Requires-Python: >=3.13
+Requires-Dist: pytest>=9.0.2
+Requires-Dist: pytest-cov>=7.0.0
+Requires-Dist: black>=26.3.1
+Requires-Dist: ruff>=0.15.7
+Requires-Dist: isort>=8.0.1
+Requires-Dist: pre-commit>=4.5.1
+Requires-Dist: commitizen>=4.13.9
+Requires-Dist: taskipy>=1.14.1

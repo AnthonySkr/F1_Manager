@@ -1,21 +1,12 @@
-from models import Track, TrackType
+from models import Car
 
 
 def main() -> None:
     """Entry point for F1 manager game."""
-    paul = Track(
-        "Paul Ricard",
-        "France",
-        "Vierzon",
-        TrackType.STREET,
-        72,
-        90,
-        20,
-        5,
-        1,
-        2,
-    )
-    print(paul)
+    car = Car(90, 92, 91, 89, 90, 92)
+
+    stats = car.get_stats_display()
+    print(stats)
 
 
 if __name__ == "__main__":
